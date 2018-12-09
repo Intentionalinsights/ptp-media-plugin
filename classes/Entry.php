@@ -1,7 +1,4 @@
 <?php
-/**
- * Represents a media entry
- */
 
 namespace PTP\Media;
 
@@ -15,13 +12,22 @@ class Entry
     public $created;
     public $edited;
 
-    static public function find($id)
+    public function __construct($properties = [])
     {
-
+        if ($properties) {
+            $this->hydrate($properties);
+        }
     }
 
-    public function save()
+    private function hydrate($properties)
     {
+        $this->id     = $properties['id']     ?: null;
+        $this->title  = $properties['title']  ?: null;
+        $this->url    = $properties['url']    ?: null;
+        $this->date   = $properties['date']   ?: null;
+        $this->active = $properties['active'] ?: null;
 
+        $this->created = $properties['created'] ?: null;
+        $this->edited  = $properties['edited']  ?: null;
     }
 }

@@ -26,8 +26,19 @@ foreach (glob(__DIR__ . "/shortcodes/*.php") as $file) {
 }
 
 
+/******************************************************/
+
+$repository = new \PTP\Media\Repository($wpdb, $mediaTable);
+
+$adminController = new \PTP\Media\AdminController($_GET, $_POST, $repository);
+
+$ptpMediaPlugin = new \PTP\Media\Plugin(plugin_basename(__FILE__), __FILE__, $wpdb, $mediaTable, $adminController);
+
+$ptpMediaPlugin->register();
 
 /**
  * Function to run when plugin is activated from plugins control panel
  */
-register_activation_hook( __FILE__, 'activate_ptp_media_plugin' );
+register_activation_hook( __FILE__,   [$ptpMediaPlugin, 'activate']);
+register_deactivation_hook( __FILE__, [$ptpMediaPlugin, 'deactivate']);
+
