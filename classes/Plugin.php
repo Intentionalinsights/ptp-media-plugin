@@ -58,11 +58,12 @@ class Plugin
         $charset_collate = $this->wpdb->get_charset_collate();
 
         $query = "CREATE TABLE IF NOT EXISTS {$this->mediaTable} (
-        `id`     mediumint(9) NOT NULL AUTO_INCREMENT,
-        `title`  varchar(255)     NULL,
-        `url`    varchar(255)     NULL,
-        `date`   DATE             NULL,
-        `active` bool             NULL,
+        `id`          mediumint(9) NOT NULL AUTO_INCREMENT,
+        `title`       varchar(255)     NULL,
+        `url`         varchar(255)     NULL,
+        `date`        DATE             NULL,
+        `active`      bool             NULL,
+        `description` text,
         
         `created` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
         `edited`  DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,

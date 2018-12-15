@@ -14,9 +14,23 @@ class Repository
         $this->mediaTable = $mediaTable;
     }
 
+    /**
+     * @param $id
+     * @return Entry|null
+     */
     public function find($id)
     {
-        $query = "";
+        $query = "SELECT * FROM {$this->mediaTable} WHERE id = %d";
+
+        $wpQuery = $this->wpdb->prepare($query, $id);
+
+        $result = $this->wpdb->get_results($wpQuery, 'ARRAY_A');
+
+        if (!$result) {
+            return null;
+        }
+
+        return new Entry($result[0]);
     }
 
     /**
@@ -39,6 +53,34 @@ class Repository
 
     public function save(Entry $entry)
     {
-        $query = "";
+        $success = false;
+
+        $data = [
+            'title'       => $entry->title,
+            'url'         => $entry->url,
+            'date'        => $entry->date,
+            'description' => $entry->description,
+            'active'      => ($entry->active) ? '1' : '0',
+        ];
+
+        $formats = ['%s', '%s', '%s', '%s', '%d'];
+
+        if ($entry->id) {
+
+            if (false !== $this->wpdb->update($this->mediaTable, $data, ['id' => $entry->id], $formats, ['%d'])) {
+
+                $success = true;
+            }
+
+        } else {
+
+            if ($this->wpdb->insert($this->mediaTable, $data, $formats)) {
+                $entry->id = $this->wpdb->insert_id;
+
+                $success = true;
+            }
+        }
+
+        return $success;
     }
 }
