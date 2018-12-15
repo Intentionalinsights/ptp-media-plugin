@@ -2,6 +2,8 @@
 use function PTP\Media\escape;
 use function PTP\Media\outputErrors;
 
+wp_enqueue_media();
+
 $errors = (isset($errors)) ? $errors : [];
 ?>
 
@@ -64,21 +66,29 @@ if (!$entry) {
                 </label>
             </div>
 
-            <hr>
-
-            <button class="btn btn-primary" type="submit">
-                Save
-            </button>
-
-            <a class="btn btn-sm btn-default" href="?page=ptp_media">Cancel</a>
 
         </div>
 
         <div class="col-12 col-sm-6">
 
+            <input type="hidden" name="image_url" id="image_url" value="<?php echo escape($entry->image_url); ?>">
+
+            <img src="<?php echo escape($entry->image_url); ?>" alt="Media Image" id="media_image" class="media-image">
+
+            <hr>
+
+            <button class="upload_image_button">Update Image</button>
+
         </div>
 
     </div>
 
+    <hr>
+
+    <button class="btn btn-primary" type="submit">
+        Save
+    </button>
+
+    <a class="btn btn-sm btn-default" href="?page=ptp_media">Cancel</a>
 
 </form>

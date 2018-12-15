@@ -61,9 +61,10 @@ class Repository
             'date'        => $entry->date,
             'description' => $entry->description,
             'active'      => ($entry->active) ? '1' : '0',
+            'image_url'   => $entry->image_url,
         ];
 
-        $formats = ['%s', '%s', '%s', '%s', '%d'];
+        $formats = ['%s', '%s', '%s', '%s', '%d', '%s'];
 
         if ($entry->id) {
 

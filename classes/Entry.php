@@ -10,12 +10,16 @@ class Entry
     public $date;
     public $active;
     public $description;
+    public $image_url;
 
     public $created;
     public $edited;
 
     public function __construct($properties = [])
     {
+        // Defaults
+        $this->image_url = "/wp-content/uploads/PTP_Logo_250.png";
+
         if ($properties) {
             $this->hydrate($properties);
         }
@@ -23,12 +27,16 @@ class Entry
 
     public function hydrate($properties)
     {
-        $this->id          = $properties['id']     ?: null;
-        $this->title       = $properties['title']  ?: null;
-        $this->url         = $properties['url']    ?: null;
-        $this->date        = $properties['date']   ?: null;
-        $this->active      = $properties['active'] ?: null;
+        $this->id          = $properties['id']          ?: null;
+        $this->title       = $properties['title']       ?: null;
+        $this->url         = $properties['url']         ?: null;
+        $this->date        = $properties['date']        ?: null;
+        $this->active      = $properties['active']      ?: null;
         $this->description = $properties['description'] ?: null;
+
+        if ($properties['image_url']) {
+            $this->image_url = $properties['image_url'];
+        }
 
         $this->created = $properties['created'] ?: null;
         $this->edited  = $properties['edited']  ?: null;

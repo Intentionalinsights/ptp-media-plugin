@@ -1,3 +1,7 @@
 /**
  * ptp-media-plugin/assets/admin.css
  */
+
+.media-image {
+    max-width: 95%;
+}

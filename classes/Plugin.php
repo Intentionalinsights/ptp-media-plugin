@@ -64,6 +64,7 @@ class Plugin
         `date`        DATE             NULL,
         `active`      bool             NULL,
         `description` text,
+        `image_url`   varchar(255),
         
         `created` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
         `edited`  DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
