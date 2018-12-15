@@ -2,8 +2,6 @@
  * ptp-media-plugin/assets/admin.js
  */
 
-console.log("Hello World");
-
 jQuery(document).ready(function ($) {
 
     $(document).on("click", ".upload_image_button", function (e) {
