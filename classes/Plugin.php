@@ -80,7 +80,7 @@ class Plugin
      */
     public function deactivate()
     {
-        // return;
+        return;
 
         $query = "DROP TABLE IF EXISTS {$this->mediaTable}";
 
