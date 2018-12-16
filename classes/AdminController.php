@@ -81,7 +81,7 @@ class AdminController
 
         $entry->hydrate($this->_post);
 
-        if ($entry->isValid()) {
+        if (!$entry->isValid()) {
             $errors = $entry->errors();
 
             $errors['save'] = "Unable to save the media entry";

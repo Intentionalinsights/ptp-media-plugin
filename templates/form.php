@@ -77,7 +77,7 @@ if (!$entry) {
 
             <hr>
 
-            <button class="upload_image_button">Update Image</button>
+            <button type="button" class="upload_image_button">Update Image</button>
 
         </div>
 
