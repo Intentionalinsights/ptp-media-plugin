@@ -65,7 +65,7 @@ class AdminController
 
         $titleAction = "Create New";
 
-//        $errors = ['title' => 'The title is needed', 'date' => 'The date doesn\'t appear to be valid', 'url' => 'The url doesn\'t appear to be valid.'];
+        // $errors = ['title' => 'The title is needed', 'date' => 'The date doesn\'t appear to be valid', 'url' => 'The url doesn\'t appear to be valid.'];
         include __DIR__ . '/../templates/form.php';
     }
 

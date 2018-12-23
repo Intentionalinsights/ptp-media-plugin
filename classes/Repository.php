@@ -36,11 +36,25 @@ class Repository
     /**
      * @return array
      */
-    public function findAll()
+    public function findAll($filters = [], $latestEntries = null)
     {
         $entries = [];
 
-        $query = "SELECT * FROM {$this->mediaTable} ORDER BY date DESC";
+        $filter = '';
+
+        if ($filters) {
+            $appliedFilters = [];
+
+            foreach ($filters as $column => $value) {
+                $appliedFilters[] = "{$column} = {$value}";
+            }
+
+            $filter = "WHERE " . implode(' AND ', $appliedFilters);
+        }
+
+        $limit = ($latestEntries) ? " LIMIT {$latestEntries}" : '';
+
+        $query = "SELECT * FROM {$this->mediaTable} {$filter} ORDER BY date DESC {$limit}";
 
         $results = $this->wpdb->get_results($query, 'ARRAY_A');
 
@@ -49,6 +63,16 @@ class Repository
         }
 
         return $entries;
+    }
+
+    public function findAllActive()
+    {
+        return $this->findAll(['active' => 1]);
+    }
+
+    public function findLatest()
+    {
+        return $this->findAll(['active' => 1], 4);
     }
 
     public function save(Entry $entry)

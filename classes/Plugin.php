@@ -15,13 +15,16 @@ class Plugin
 
     private $adminController;
 
-    public function __construct($pluginName, $pluginFile, $wpdb, $mediaTable, $adminController)
+    private $publicController;
+
+    public function __construct($pluginName, $pluginFile, $wpdb, $mediaTable, $adminController, $publicController)
     {
-        $this->pluginName      = $pluginName;
-        $this->pluginFile      = $pluginFile;
-        $this->wpdb            = $wpdb;
-        $this->mediaTable      = $mediaTable;
-        $this->adminController = $adminController;
+        $this->pluginName       = $pluginName;
+        $this->pluginFile       = $pluginFile;
+        $this->wpdb             = $wpdb;
+        $this->mediaTable       = $mediaTable;
+        $this->adminController  = $adminController;
+        $this->publicController = $publicController;
     }
 
     public function register()
@@ -29,6 +32,14 @@ class Plugin
         \add_action('admin_enqueue_scripts', [$this, 'enqueueAdmin']);
         \add_action('admin_menu',            [$this, 'adminMenu']);
         //\add_filter('plugin_action_links_' . $this->pluginName, [$this, 'settingsLink']);
+
+        $this->addShortCodes();
+    }
+
+    public function addShortCodes()
+    {
+        \add_shortcode('ptp_media',        [$this->publicController, 'allMedia']);
+        \add_shortcode('ptp_media_latest', [$this->publicController, 'latestMedia']);
     }
 
     /**
