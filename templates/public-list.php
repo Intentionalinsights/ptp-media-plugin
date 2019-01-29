@@ -1,5 +1,9 @@
 <style type="text/css">
 
+.ptp-media-entry .panel {
+    min-height: 350px;
+}
+
 .ptp-media-entry .panel-header {
     text-align: center;
     padding: 3px;
@@ -25,23 +29,14 @@
             <div class="panel panel-default">
 
                 <div class="panel-heading">
-                    <h3 class="panel-title"><?php echo \PTP\Media\escape($entry->title); ?></h3>
+                    <h3 class="panel-title">
+                        <a href="<?php echo $entry->url; ?>" target="_blank">
+                            <?php echo \PTP\Media\escape($entry->title); ?>
+                        </a>
+                    </h3>
                 </div>
-
-                <div class="panel-header">
-                    <img src="<?php echo $entry->image_url; ?>" alt="Preview image for the media entry">
-                </div>
-
                 <div class="panel-body">
-
                     <?php echo \PTP\Media\escape($entry->description); ?>
-
-                </div>
-
-                <div class="panel-footer">
-                    <a href="<?php echo $entry->url; ?>" target="_blank">
-                        <span class="glyphicon glyphicon-new-window"></span> See more
-                    </a>
                 </div>
             </div>
 
